@@ -87,6 +87,10 @@
 #### Technical Requirements
   1. 
 
+### Ben Alman - Building the App, Part 1: Getting Started
+#### Getting Started
+  - npm install --save-dev grunt grunt-contrib-{copy, watch, jshint}
+    - {copy} is a bash helper
 
 
 
