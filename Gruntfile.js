@@ -3,21 +3,50 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    uglify: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+    clean: {
+
+    },
+    connect: {
+      dev: {
+        options: {
+          base: ['prod', 'src', '.'],
+          port: 8000,
+          hostname: '*',
+        }
       },
-      build: {
-        src: 'src/<%= pkg.name %>.js',
-        dest: 'build/<%= pkg.name %>.min.js'
+    },
+    copy: {
+
+    },
+    jshint: {
+
+    },
+    watch: {
+      jshintrc: {
+        files: ['**/.jshintrc'],
+        tasks: ['jshint'],
+      },
+      jshintrc: {
+        files: ['<%= jshint.app.src %>'],
+        tasks: ['jshint:app'],
       }
-    }
+    },
   });
 
-  // Load the plugin that provides the "uglify" task.
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-
   // Default task(s).
-  grunt.registerTask('default', ['uglify']);
+  grunt.registerTask('default', []);
+
+  // example of creating custom task in grunt
+  // grunt.registerTask('server', 'start the REST server', function() {
+  //   require('./server/server');
+  //   grunt.task.run('connect:' + this.args.join(':'));
+  // });
+
+  // Load the plugin that provides the task.
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
 };
