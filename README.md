@@ -91,8 +91,90 @@
 #### Getting Started
   - npm install --save-dev grunt grunt-contrib-{copy, watch, jshint}
     - {copy} is a bash helper
+  - gruntfile
+    - break up tasks / modules to keep gruntfile light
+  - git
+    - add npm modules to gitignore
+    - only check in package.json file
 
+### Irene Ros - ntro to MVC on the Client
+#### MVC Parts
+  - Model
+    - responsible for data access, biz logic and state mngmnt
+  - View
+    - render ui
+  - Controller
+    - broker b/w model & view
 
+#### Other MV* like approaches
+  - Model-View-Adapter
+  - Model-View-Presenter
+  - Model View ViewModel
+  - Presentation-Abstraction-Control
+
+#### Poor coding patterns
+  - all UI powered
+    - event driven callbacks
+  - repetitive
+    - how many times are we going to selelct that element?
+  - not organizer into logical groups
+    - no UI components, no data separation
+  - hard to follow the flow
+    - flow is dictated by events
+  - tightly coupled data and views
+    - updating views in callbacks requires data fetching has access to view
+  - lack of inheritance
+    - resulting in duplication of attributes and lack of propagation of common behavior
+  - all UI componenets built using jQuery
+    - no template and reuse
+
+#### what does Backbone provide?
+  - class inheritance
+  - event system
+  - history management
+
+#### where does Backbone fit?
+  - server
+    - maintains state
+    - servers data
+    - handles data changes
+    - responsible for:
+      - security
+      - storage
+  - bb
+	  - fetches data
+	  - transforms data
+	  - renders views
+	  - updates views
+	  - handles view events
+	  - updates data
+
+#### what Backbone doesn't offer
+  - an extensive API
+    - bb is initially minimal
+  - widgets
+    - no built in reusable widgets
+  - data-binding
+    - andy change you want to the view, you have to make yourself
+  - code organization patterns
+    - there are many ways to organize your code and there isn't one correct way
+  - view management
+    - you can create views easily but handling the rendering of child views, view clean up and so on is left to the developer
+
+#### what Backbone does offer
+  - lightweight
+    - backbone is intentionally minimal & small (~1600 lines of code)
+  - inheritance
+    - 
+  - event system
+    - view updating on data change
+    - maintaining state
+  - override
+    - extensive plugins and easy to override on your own for your own use
+
+### Resources
+  - tool list: https://tinyurl.com/roost-links
+  - app: https://tinyurl.com/roost-app-1a
 
 
 ### /day one

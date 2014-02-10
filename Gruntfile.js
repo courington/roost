@@ -49,4 +49,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
+  // loads external task files in build folder
+  // can remove grunt.loadNpmTasks for each task that has been broken out
+  // grunt.loadTasks('build');
+
 };
