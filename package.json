@@ -1,0 +1,27 @@
+{
+  "name": "roostagram",
+  "version": "0.0.0",
+  "description": "roostagram",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/courington/roost.git"
+  },
+  "keywords": [
+    "roost"
+  ],
+  "author": "@chasecourington",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/courington/roost/issues"
+  },
+  "homepage": "https://github.com/courington/roost",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-uglify": "~0.3.2"
+  }
+}
