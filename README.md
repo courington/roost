@@ -1,7 +1,7 @@
 # ROOST
 ## Javascript Conference
 
-### @bobholt - Intro to Application Architecture
+### Bob Holt - Intro to Application Architecture
 #### Arch of a GUI App
   - scalable
   - simply written
@@ -27,7 +27,7 @@
   		- payload size (tags && extra markup === bloat)
   		- complicated
   - REST (representational state transfer)
-  	- GET/POST/UPDATE/DELETE
+  	- GET/POST/PUT/DELETE
   	- payload can be anything we want (json, xml, html, css(?))
   	- ideal payload === json
   - Transport Protocols
@@ -172,9 +172,86 @@
   - override
     - extensive plugins and easy to override on your own for your own use
 
+### Irene Ros: Building the App, Part 2: Our First Page
+#### constructor vs inheritance
+  - model constructor: a constrcutor is a function that creates a new instance when it is called
+    - `var ConstructorName = Backbone.Model.extend({name: 'foobar'});`
+  - binding Model to an API server
+    - `task.fetch() => GET`
+      - gets the data for the model
+    - `task.save() => POST, PUT`
+      - used to save a new model && update an existing modal
+    - `task.destroy() => DELETE`
+      - used to delete a model on the server
+  - RESTful API & Backbone
+    - `GET /model/:id`
+    - `POST /model`
+    - `PUT /model/:id`
+    - `DELETE /model/:id`
+  - overriding HTTP protocol
+    - i.e. Web Sockets; need to override `sync` && `parse` methods
+  - `urlRoot` allows us to override Backbone default url naming/routing
+  - `.fetch()` is asynchronous so we need to specify a callback to have resource
+    - using differeds
+    - using promises
+  - `.destroy()` && `.save()` have flag for `{wait: true}` which makes the call synchronous
+  - handling errors
+    - 
+
+
+### Mike Pennisi - AMD and RequireJS
+#### Old and Busted: The Module Pattern
+  - closures and controlling the global scope
+  - Module Pattern: seperation of concenrs, dependencies and selecting what can be exposed
+  - what's wrong with this picture?
+    - dependencies are implicit (difficult to maintain larger projects)
+    - dependends on global leakage
+    - module authors have to implement their own collision handling solutions
+    - tension b/w best practices for front-end and back-end
+
+#### New Hotness: AMD (async module definition)
+  - explicit dependencies
+  - no need for gobal dependencies
+  - consumer controls dependency names
+  - suport best practices for development and production with dynamic script injection
+
+#### Supporting Non-AMD libraries: "shim" config
+  - defines local modules in require
+
+#### Optimization
+  - RequireJS has an optimization tool that does the follow:
+    - comibnes related scripts together into build layers and minigies them via qgligy or closure compiles
+    - minifies css
+
+### Irene Ros: Building the App, Part 3: Adding a Collection
+#### Backbone Collections
+  - like an array of models
+  - `var Tasks = Backbone.Collection.extend({ model: Task });`
+  - `var myTasks = new Tasks([ {name: 'foo'}, {name: 'bar'} ]);`
+
+#### Filling a Collection
+  - Initialize
+  	- `var collections = new Tasks([models]);`
+  - Rest
+  	- `collection.reset([models]);`
+  - Add
+    - `collection.add([models]);`
+
+#### Creating new Models
+  - `.create()` method is a convience method that allows for creating a new model within a collection. this is equivalent for:
+    1. instantiating a new model
+    2. saving it to the server
+    3. adding it to a collection
+
+#### Events
+  - when a collection changes, appropriate events will fire to signal the change that occured
+
 ### Resources
   - tool list: https://tinyurl.com/roost-links
   - app: https://tinyurl.com/roost-app-1a
+
+
+
 
 
 ### /day one
