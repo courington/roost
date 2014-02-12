@@ -246,12 +246,182 @@
 #### Events
   - when a collection changes, appropriate events will fire to signal the change that occured
 
-### Resources
-  - tool list: https://tinyurl.com/roost-links
-  - app: https://tinyurl.com/roost-app-1a
+### Bob Holt: Building the App, Part 4: Wiring it Together
+#### Wiring & Layout
+  - Abstraction & Reusability
+    - DRY (don't repeat yourself) via: "Pragmatic Programmer"
+    - Once and Only Once
+  - Perils of too-early abstraction
+  	- "Refactoring" Martin Fowler
 
-
-
-
+#### Routing
+  - add jQuery script to prevent anchor links from using browser behavior and to use bb routing `$('document').click('a[href]:not('data-bypass')', function(evt) {evt.preventDefault()});`
 
 ### /day one
+### day two
+
+### Ben Alman: Improving Your Styling Workflow
+#### Better styles with Stylus
+  - http://learnboost.github.io/stylus/ stylus instead of sass b/c it doesn't require ruby
+  - grunt-contrib-sass is very slow because it calls out to ruby
+;
+
+### Irene Ros: Building the App, Part 5: Writing Data
+#### Putting the "C" in CRUD - creating data in the app
+  - https://developer.mozilla.org/en-US/docs/Web/API/File web file API
+  - https://github.com/rendro/vintageJS plugin for vintage photo effects on uploaded photos
+  - no bower plugin? `$ bower install` + github url
+
+### Mike Pennisi: Building the App, Part 5: Writing Data
+#### Evergreen browsers + open standards process
+  - crazy fun playground for web app developers
+  - progressive enhancement || graceful degradation
+    - dynamically reduce feature set according to available resources
+      - "we can still accomodate you, but the experience will be a little different"
+    - what about non-standardized features?
+    - what about legacy browsers?
+      - might be latest version of chrome buy maybe my machine doesn't have a web cam
+  - The Adapter Pattern
+    - translate incompatible interfaces
+    - sizzlejs http://sizzlejs.com/ adpater for selectors (used in jQuery)
+  - getUserMedia api (https://developer.mozilla.org/en-US/docs/Web/API/Navigator.getUserMedia)
+    - shim = GUM (https://www.npmjs.org/package/getusermedia)
+    - http://addyosmani.github.io/getUserMedia.js/face-detection-demo/
+
+### Mike Pennisi: Unit Testing
+#### Why test?
+  - test are great for developers!
+    - safety net
+    - technically enforced documentation
+    - signal for coding standards in open source software
+  - tests are great for the project
+     - testable code is modular code
+     - reusable, flexible, readable
+     - good code
+
+#### A note on software testing
+  - what is a software test?
+    - a piece of code that tests another piece of code
+    - code that automatically determines if production code is operating as intended
+      - unit test === distinct units/modules with specific functionality
+      - functional test === units/modules functioning together
+      - integration test === whole system is working correctly
+    - test classifications
+      - static code analysis (i.e. jshint)
+      - fuzz test === throwing random data at a system and seeing how it crashes or fails to crash
+      - smoke test === superficially tests target system, runs very quickly
+      - regression test === found a bug and inserting this test so that bug doesn't come back
+
+#### The Unit Test: structure
+  - setup
+  - execution
+  - validation
+  - teardown
+
+#### The Unit Test: assertions
+  - defines some simple expectation. at the most basic level: "does the given expression evaluate to `true`"
+  - may be defined with more advanced semantics:
+    - does the given array have the expected elements?
+    - does the given function throw an error?
+    - etc.
+
+#### Test-Driven Development
+  - http://tddjs.com/
+  - defined: a workflow for authoring code where unit tests are written before the logic they excercise.
+  - process:
+    - write a test
+    - watch it fail
+    - write the bare minimum to make it pass
+    - re-factor as necesary
+  - why?
+    - think about the API first
+    - organize code to be testable from the start
+    - avoid technical debt
+    - maintain assurances about entire code base as it develops
+    - emotionally satisfying
+
+#### Behavior-Driven Development
+  - "Introducing BDD" Dan North
+  - driven by business value in agile workflow over simply technical testing in unit testing. brings in whole team, technical and non-technical
+  - why?
+    - help avoid "brittle" tests (more on this notion later)
+    - encourage wholistic thinking about product/service
+    - 
+
+#### Domain-Specific Languages
+  - [warning] superficial distinctions ahead!
+  - using more plain english
+    - i.e. `suite()` === `describe()` || `setup()` === `it()` 
+    - Jasmine is BDD style
+
+#### Testing Tools
+  - Mocha (http://visionmedia.github.io/mocha/)
+    - assertions
+      - agnostic-choose your favorite library
+      - no enforcement of assertion count
+      - assertion libraries for mocha
+        - Should
+        - Expect.js
+        - Chai
+    - test structure
+      - support multiple styles
+      - including all of the above!
+    - async API
+      - simple `done` callback
+      - async-on-demand
+    - runs in browser and in nodejs out of the box
+
+#### Integration Tests
+  - we want to express acceptance criteria for module interactions in a separate place and at a higher level
+  - we don't want brittle tests
+    - unit tests are brittle, they only test a single specific thing
+  - did we build the right thing? (integration test)
+  - did we build the thing right (unit test)
+
+#### why do we need unit tests when we can run integration tests?
+  - unit tests are fast, targeted tests
+  - easily test edge cases and failure modes
+  - test conditions that may not occur in your app today
+  - localized errors
+  - integration tests take a while to setup/teardown whole application
+
+#### Intro to Selenium
+  - http://docs.seleniumhq.org/
+  - the application object
+    - ability to create fixtures
+    - repetitiion and reuse of code
+    - building a secondary application that just runs tests; for your eyes only
+      - just don't go crazy
+  - remember to consider race conditions; integration tests won't run as fast as your local box
+
+### Ben Alman: Optimizations
+#### What to do before we deploy
+  - RequireJS as a build tool to compress and concatenate js files (http://requirejs.org/docs/optimization.html)
+  - two modes / grunt tasks for dev && prod
+    - dev mode / fast development environment
+      - easy to write
+      - easy to debug
+    - prod mode / fast raw performance
+      - easy to deploy
+      - remove whitespace, comments, etc.
+      - debugging?
+        - using source maps
+  - follow grunt task with watch to keep it open and running
+    - grunt connect:dev watch
+      - starts connect web server and keeps it alive
+    - for prod pass option in task for `keepalive: true`
+  - `bower install --save almond` install almond a smaller build of require for prod (https://github.com/jrburke/almond)
+
+### Bob Holt: Making this a boilerplate
+#### Remove the server
+  - remove express, sqlite from package.json
+  - remove grunt tasks for server
+  - remove server dependencies
+
+### /day two
+
+### Resources
+  - tool list: https://tinyurl.com/roost-links
+  - app: https://github.com/bocoup/roostagram
+  - Day 1 Slides: http://tinyurl.com/roost-slides-1
+  - Day 2 Slides: http://tinyurl.com/roost-slides-2
