@@ -355,7 +355,7 @@
     - Jasmine is BDD style
 
 #### Testing Tools
-  - Mocha (http://visionmedia.github.io/mocha/)
+  - Mocha (http://mochajs.org/)
     - assertions
       - agnostic-choose your favorite library
       - no enforcement of assertion count
